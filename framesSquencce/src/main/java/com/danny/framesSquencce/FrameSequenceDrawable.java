@@ -34,8 +34,6 @@ import android.os.SystemClock;
  */
 
 public class FrameSequenceDrawable extends Drawable implements Animatable, Runnable {
-    private static final String TAG = "FrameSequenceDrawable";
-
     /**
      * These constants are chosen to imitate common browser behavior for WebP/GIF.
      * If other decoders are added, this behavior should be moved into the WebP/GIF decoders.

@@ -17,7 +17,6 @@
 #ifndef RASTERMILL_FRAMESQUENCE_WEBP_H
 #define RASTERMILL_FRAMESQUENCE_WEBP_H
 
-#include "../gif/config.h"
 #include "../webp/include/webp/decode.h"
 #include "../webp/include/webp/demux.h"
 

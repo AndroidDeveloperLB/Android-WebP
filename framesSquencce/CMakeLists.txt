@@ -11,19 +11,19 @@ cmake_minimum_required(VERSION 3.4.1)
 # Gradle automatically packages shared libraries with your APK.
 
 #################  GIF LIB   ################################
-add_library(
-            # add gif library
-            native-gif
-
-            STATIC
-
-            src/main/cpp/gif/dgif_lib.c
-            src/main/cpp/gif/egif_lib.c
-            src/main/cpp/gif/gifalloc.c
-            src/main/cpp/gif/gif_err.c
-            src/main/cpp/gif/gif_hash.c
-            src/main/cpp/gif/quantize.c
-            )
+#add_library(
+#            # add gif library
+#            native-gif
+#
+#            STATIC
+#
+#            src/main/cpp/gif/dgif_lib.c
+#            src/main/cpp/gif/egif_lib.c
+#            src/main/cpp/gif/gifalloc.c
+#            src/main/cpp/gif/gif_err.c
+#            src/main/cpp/gif/gif_hash.c
+#            src/main/cpp/gif/quantize.c
+#            )
 
 include_directories(src/main/cpp/gif/)
 ##############################################################
@@ -92,7 +92,6 @@ add_library( native-frame-sequence
              src/main/cpp/framesequence/BitmapDecoderJNI.cpp
              src/main/cpp/framesequence/FrameSequence.cpp
              src/main/cpp/framesequence/FrameSequenceJNI.cpp
-             src/main/cpp/framesequence/FrameSequence_gif.cpp
              src/main/cpp/framesequence/FrameSequence_webp.cpp
              src/main/cpp/framesequence/JNIHelpers.cpp
              src/main/cpp/framesequence/Registry.cpp
@@ -140,5 +139,6 @@ target_link_libraries(
                         native-frame-sequence
                         -ljnigraphics
 
-                        native-gif native-webp ${log-lib}
+#                        native-gif
+        native-webp ${log-lib}
                      )

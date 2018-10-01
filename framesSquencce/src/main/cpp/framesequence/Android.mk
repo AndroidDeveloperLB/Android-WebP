@@ -23,11 +23,6 @@ LOCAL_PATH := $(call my-dir)
 #include $(PREBUILT_STATIC_LIBRARY)
 
 ### include giflib as a prebuilt lib 使用动态链接库的方式 ###
-include $(CLEAR_VARS)
-LOCAL_MODULE            := giflib-prebuilt
-LOCAL_SRC_FILES         := external/giflib/x86_64/libgif.so
-include $(PREBUILT_SHARED_LIBRARY)
-
 
 ### include libwebp-decode as a prebuilt lib 使用静态链接库的方式 ###
 include $(CLEAR_VARS)
@@ -41,19 +36,16 @@ LOCAL_STATIC_LIBRARIES = giflib-prebuilt
 FRAMESEQUENCE_INCLUDE_WEBP = true
 LOCAL_LDFLAGS := -llog -ljnigraphics
 #LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
-LOCAL_C_INCLUDES := \
-	external/giflib
 
 LOCAL_MODULE    := libframesequence
 LOCAL_SRC_FILES := \
 	BitmapDecoderJNI.cpp \
 	FrameSequence.cpp \
 	FrameSequenceJNI.cpp \
-	FrameSequence_gif.cpp \
 	JNIHelpers.cpp \
 	Registry.cpp \
-	Stream.cpp  
-	
+	Stream.cpp
+
 
 ifeq ($(FRAMESEQUENCE_INCLUDE_WEBP),true)
 	LOCAL_C_INCLUDES += external/webp/include
