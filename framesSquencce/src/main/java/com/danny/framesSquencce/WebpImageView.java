@@ -97,7 +97,7 @@ public class WebpImageView extends android.support.v7.widget.AppCompatImageView 
         defaultCount = mTypedArray.getInteger(R.styleable.webImg_defaultCount, 0);
 
         // load raw resources into streams, and get FrameSequenceDrawable, store them in array
-        mDrawable = initWebpDrawable(mTypedArray.getResourceId(R.styleable.webImg_defaultRawId, -1), defaultCount);
+        mDrawable = initWebpDrawable(mTypedArray.getResourceId(R.styleable.webImg_defaultRawId, -1));
         if (mDrawable != null) {
             mDrawable.setOnAnimationListener(new FrameSequenceDrawable.OnAnimationListener() {
                 @Override
@@ -117,22 +117,21 @@ public class WebpImageView extends android.support.v7.widget.AppCompatImageView 
         setImageDrawable(mDrawable);
     }
 
-    private FrameSequenceDrawable initWebpDrawable(int resId, int animationCount) {
+    private FrameSequenceDrawable initWebpDrawable(int resId) {
         try {
             InputStream is = getResources().openRawResource(resId);
-            return initWebpDrawable(is, animationCount);
+            return initWebpDrawable(is);
         } catch (Exception e) {
             Log.e(TAG, "e is " + e.getMessage());
             return null;
         }
     }
 
-    private FrameSequenceDrawable initWebpDrawable(InputStream is, int animationCount) {
+    private FrameSequenceDrawable initWebpDrawable(InputStream is) {
         FrameSequenceDrawable drawable = null;
         FrameSequence fs = null;
         try {
             fs = FrameSequence.decodeByteArray(toByteArray(is));
-            fs.setDefaultLoopCount(animationCount);
             drawable = new FrameSequenceDrawable(fs, mProvider);
         } catch (Exception e) {
             Log.e(TAG, "error happens when get FrameSequenceDrawable : "
@@ -159,17 +158,12 @@ public class WebpImageView extends android.support.v7.widget.AppCompatImageView 
         return output.toByteArray();
     }
 
-    public void setDefaultAnimationCount(int defaultAnimationCount) {
-        mDrawable.setAnimationCount(defaultAnimationCount);
-    }
-
-
-    public void setNeutralDrawable(int resId) {
+    public void setAnimatedDrawable(int resId) {
         if (mDrawable != null) {
             mDrawable.destroy();
             mDrawable = null;
         }
-        mDrawable = initWebpDrawable(resId, 1);
+        mDrawable = initWebpDrawable(resId);
         mDrawable.setOnAnimationListener(new FrameSequenceDrawable.OnAnimationListener() {
             @Override
             public void onFinished(FrameSequenceDrawable drawable) {
@@ -185,18 +179,19 @@ public class WebpImageView extends android.support.v7.widget.AppCompatImageView 
         });
     }
 
-    public void setNeutralDrawable(InputStream is) {
+    public void setAnimatedDrawable(InputStream is) {
         if (mDrawable != null) {
             mDrawable.destroy();
             mDrawable = null;
         }
-        mDrawable = initWebpDrawable(is, 1);
+        mDrawable = initWebpDrawable(is);
         mDrawable.setOnAnimationListener(new FrameSequenceDrawable.OnAnimationListener() {
             @Override
             public void onFinished(FrameSequenceDrawable drawable) {
                 if (listener != null)
                     listener.onAnimationFinished();
             }
+
             @Override
             public void onStart(FrameSequenceDrawable drawable) {
                 if (listener != null)

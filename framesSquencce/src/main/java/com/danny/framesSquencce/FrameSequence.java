@@ -38,7 +38,6 @@ public class FrameSequence {
     private int mHeight;
     private boolean mOpaque;
     private int mFrameCount;
-    private int mDefaultLoopCount;
 
     public FrameSequence() {
 
@@ -48,11 +47,6 @@ public class FrameSequence {
     public int getHeight() { return mHeight; }
     public boolean isOpaque() { return mOpaque; }
     public int getFrameCount() { return mFrameCount; }
-    public int getDefaultLoopCount() { return mDefaultLoopCount; }
-
-    public void setDefaultLoopCount(int count) {
-        mDefaultLoopCount = count;
-    }
 
     private static native FrameSequence nativeDecodeByteArray(byte[] data, int offset, int length);
     private static native FrameSequence nativeDecodeStream(InputStream is, byte[] tempStorage);
@@ -71,7 +65,6 @@ public class FrameSequence {
         mHeight = height;
         mOpaque = opaque;
         mFrameCount = frameCount;
-        mDefaultLoopCount = defaultLoopCount;
     }
 
     public static FrameSequence decodeByteArray(byte[] data) {

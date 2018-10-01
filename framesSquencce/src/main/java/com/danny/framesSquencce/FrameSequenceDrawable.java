@@ -17,20 +17,17 @@
 package com.danny.framesSquencce;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.os.SystemClock;
-import android.util.Log;
 
 /**
  * @author danny.jiang
@@ -61,10 +58,6 @@ public class FrameSequenceDrawable extends Drawable implements Animatable, Runna
             sDecodingThread.start();
             sDecodingThreadHandler = new Handler(sDecodingThread.getLooper());
         }
-    }
-
-    public void setAnimationCount(int animationCount) {
-        mFrameSequence.setDefaultLoopCount(animationCount);
     }
 
     public static interface OnAnimationListener {
@@ -108,34 +101,9 @@ public class FrameSequenceDrawable extends Drawable implements Animatable, Runna
     /**
      * Register a callback to be invoked when a FrameSequenceDrawable finishes looping.
      *
-     * @see #setLoopBehavior(int)
      */
     public void setOnAnimationListener(OnAnimationListener onAnimationListener) {
         mOnAnimationListener = onAnimationListener;
-    }
-
-    /**
-     * Loop only once.
-     */
-    public static final int LOOP_ONCE = 1;
-
-    /**
-     * Loop continuously. The OnFinishedListener will never be called.
-     */
-    public static final int LOOP_INF = 2;
-
-    /**
-     * Use loop count stored in source data, or LOOP_ONCE if not present.
-     */
-    public static final int LOOP_DEFAULT = 3;
-
-    /**
-     * Define looping behavior of frame sequence.
-     * <p>
-     * Must be one of LOOP_ONCE, LOOP_INF, or LOOP_DEFAULT
-     */
-    public void setLoopBehavior(int loopBehavior) {
-        mLoopBehavior = loopBehavior;
     }
 
     private final FrameSequence mFrameSequence;
@@ -158,8 +126,6 @@ public class FrameSequenceDrawable extends Drawable implements Animatable, Runna
     private static final int STATE_READY_TO_SWAP = 4;
 
     private int mState;
-    private int mLoopBehavior = LOOP_DEFAULT;
-
     private long mLastSwap;
     private long mNextSwap;
     private int mNextFrameToDecode;

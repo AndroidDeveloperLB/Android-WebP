@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-        webpImageView.setNeutralDrawable(getResources().openRawResource(R.raw.ben_happy_talk_right));
-        webpImageView.setDefaultAnimationCount(10);
+        webpImageView.setAnimatedDrawable(getResources().openRawResource(R.raw.ben_happy_talk_right));
     }
 
     public void defaultAnim(View view) {

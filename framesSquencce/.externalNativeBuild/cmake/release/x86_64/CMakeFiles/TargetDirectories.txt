@@ -1,6 +1,0 @@
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/native-gif.dir
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/native-webp.dir
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/native-lib.dir
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/native-frame-sequence.dir
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/edit_cache.dir
-C:/Users/user/Desktop/Android-WebP/framesSquencce/.externalNativeBuild/cmake/release/x86_64/CMakeFiles/rebuild_cache.dir
