@@ -43,17 +43,34 @@ public class FrameSequence {
 
     }
 
-    public int getWidth() { return mWidth; }
-    public int getHeight() { return mHeight; }
-    public boolean isOpaque() { return mOpaque; }
-    public int getFrameCount() { return mFrameCount; }
+    public int getWidth() {
+        return mWidth;
+    }
+
+    public int getHeight() {
+        return mHeight;
+    }
+
+    public boolean isOpaque() {
+        return mOpaque;
+    }
+
+    public int getFrameCount() {
+        return mFrameCount;
+    }
 
     private static native FrameSequence nativeDecodeByteArray(byte[] data, int offset, int length);
+
     private static native FrameSequence nativeDecodeStream(InputStream is, byte[] tempStorage);
+
     private static native FrameSequence nativeDecodeByteBuffer(ByteBuffer buffer, int offset, int capacity);
+
     public static native void nativeDestroyFrameSequence(long nativeFrameSequence);
+
     private static native long nativeCreateState(long nativeFrameSequence);
+
     private static native void nativeDestroyState(long nativeState);
+
     private static native long nativeGetFrame(long nativeState, int frameNr,
                                               Bitmap output, int previousFrameNr);
 
@@ -98,7 +115,7 @@ public class FrameSequence {
         return nativeDecodeStream(stream, tempStorage);
     }
 
-    State createState() {
+    public State createState() {
         if (mNativeFrameSequence == 0) {
             throw new IllegalStateException("attempted to use incorrectly built FrameSequence");
         }
@@ -129,17 +146,17 @@ public class FrameSequence {
 
     /**
      * Playback state used when moving frames forward in a frame sequence.
-     *
+     * <p>
      * Note that this doesn't require contiguous frames to be rendered, it just stores
      * information (in the case of gif, a recall buffer) that will be used to construct
      * frames based upon data recorded before previousFrameNr.
-     *
+     * <p>
      * Note: {@link #destroy()} *must* be called before the object is GC'd to free native resources
-     *
+     * <p>
      * Note: State holds a native ref to its FrameSequence instance, so its FrameSequence should
      * remain ref'd while it is in use
      */
-    static class State {
+    public static class State {
         private long mNativeState;
 
         public State(long nativeState) {
