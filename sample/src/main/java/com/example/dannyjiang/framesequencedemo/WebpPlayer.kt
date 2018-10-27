@@ -35,8 +35,8 @@ open class WebpPlayer {
         playRunnable = object : Runnable {
             override fun run() {
                 val frameCount = webpDecoder.frameCount
+                currentFrame = (currentFrame + 1) % (frameCount)
                 webpDecoder.currentFrame = currentFrame
-                currentFrame = (currentFrame + 1) % frameCount
                 val bitmap = webpDecoder.bitmap!!
                 val delay = webpDecoder.decodeNextFrame()
                 uiHandler.post {
@@ -131,11 +131,14 @@ open class WebpPlayer {
     }
 
     class WebpDecoder {
+        val minDelayBetweenFrames=1000L/40L
+//        val minDelayBetweenFrames=100L
+
         var frameSequence: FrameSequence? = null
         val frameCount: Int
             get() = frameSequence?.frameCount ?: 0
         var bitmap: Bitmap? = null
-        var currentFrame = -1
+        var currentFrame = 0
 
         private var state: FrameSequence.State? = null
 
@@ -151,8 +154,9 @@ open class WebpPlayer {
         }
 
         fun decodeNextFrame(): Long {
-            val delay = state!!.getFrame(currentFrame + 1, bitmap, currentFrame)
-            return if (delay <= 0L) 100L else delay
+            val delay = state!!.getFrame(currentFrame , bitmap, currentFrame-1)
+            return Math.max(delay, minDelayBetweenFrames)
+//            return if (delay > 0) delay else 100L
         }
 
     }
