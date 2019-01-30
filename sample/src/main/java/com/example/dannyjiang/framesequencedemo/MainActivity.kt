@@ -53,14 +53,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        getMenuInflater().inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var url: String? = null
-        when (item.getItemId()) {
+        when (item.itemId) {
             R.id.menuItem_all_my_apps -> url = "https://play.google.com/store/apps/developer?id=AndroidDeveloperLB"
             R.id.menuItem_all_my_repositories -> url = "https://github.com/AndroidDeveloperLB"
             R.id.menuItem_current_repository_website -> url = "https://github.com/AndroidDeveloperLB/Android-WebP"
